@@ -327,4 +327,12 @@ def res_summary(uuid: str) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run()
+    # stdio for local Claude/MCP clients; streamable-http when the
+    # cloud api.publicvcons.org droplet runs it behind Caddy.
+    transport = os.environ.get("PVCONS_MCP_TRANSPORT", "stdio")
+    if transport in ("http", "streamable-http"):
+        mcp.settings.host = os.environ.get("PVCONS_MCP_HOST", "127.0.0.1")
+        mcp.settings.port = int(os.environ.get("PVCONS_MCP_PORT", "8001"))
+        mcp.run(transport="streamable-http")
+    else:
+        mcp.run()
