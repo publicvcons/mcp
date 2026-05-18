@@ -1,0 +1,14 @@
+{
+  "_comment": "Wire the PublicVCons MCP server into Claude Desktop. Merge the 'publicvcons' entry into ~/Library/Application Support/Claude/claude_desktop_config.json (macOS) and restart Claude. Adjust the absolute paths to your checkout. PVCONS_CORPUS defaults to /Volumes/publicvcons/data if omitted.",
+  "mcpServers": {
+    "publicvcons": {
+      "command": "/Users/openconserver/venvs/tools/bin/python",
+      "args": [
+        "/Users/openconserver/publicvcons/mcp/server.py"
+      ],
+      "env": {
+        "PVCONS_CORPUS": "/Volumes/publicvcons/data"
+      }
+    }
+  }
+}
